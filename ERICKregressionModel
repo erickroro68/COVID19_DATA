@@ -1,0 +1,87 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import StandardScaler
+
+# Load the dataset
+df = pd.read_csv('/content/sample_data/AB_NYC_2019.csv')  # Replace with your COVID dataset path
+
+# Assuming the input features and columns for target and dates
+dates = pd.to_datetime(df.columns[11:])  # Adjust as per your dataset
+df['days_since_start'] = (dates - dates.min()).days
+
+y = df[dates].sum(axis=1)  # Summing over the confirmed cases of all days for each state/region
+X = df['days_since_start'].values.reshape(-1, 1)
+
+# Splitting the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# ---- Experiment 1: Linear Regression ----
+print("\nExperiment 1: Linear Regression")
+model_lr = LinearRegression()
+model_lr.fit(X_train, y_train)
+
+y_train_pred_lr = model_lr.predict(X_train)
+y_test_pred_lr = model_lr.predict(X_test)
+
+train_mse_lr = mean_squared_error(y_train, y_train_pred_lr)
+test_mse_lr = mean_squared_error(y_test, y_test_pred_lr)
+train_r2_lr = r2_score(y_train, y_train_pred_lr)
+test_r2_lr = r2_score(y_test, y_test_pred_lr)
+
+print(f"Train MSE: {train_mse_lr}, Test MSE: {test_mse_lr}")
+print(f"Train R2: {train_r2_lr}, Test R2: {test_r2_lr}")
+
+if test_r2_lr < 0.5:
+    print("The model is likely underfitting. We will try a more complex model next.")
+
+
+# ---- Experiment 2: Support Vector Regressor ----
+print("\nExperiment 2: Support Vector Regressor (SVR)")
+scaler = StandardScaler()  # Standardizing features as SVR is sensitive to scaling
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+model_svr = SVR(kernel='rbf')  # Using a Radial Basis Function (RBF) kernel
+model_svr.fit(X_train_scaled, y_train)
+
+y_train_pred_svr = model_svr.predict(X_train_scaled)
+y_test_pred_svr = model_svr.predict(X_test_scaled)
+
+train_mse_svr = mean_squared_error(y_train, y_train_pred_svr)
+test_mse_svr = mean_squared_error(y_test, y_test_pred_svr)
+train_r2_svr = r2_score(y_train, y_train_pred_svr)
+test_r2_svr = r2_score(y_test, y_test_pred_svr)
+
+print(f"Train MSE: {train_mse_svr}, Test MSE: {test_mse_svr}")
+print(f"Train R2: {train_r2_svr}, Test R2: {test_r2_svr}")
+
+if test_r2_svr < 0.5:
+    print("The SVR model is likely underfitting or overfitting, we will attempt another model.")
+
+
+# ---- Experiment 3: Gradient Boosting Regressor ----
+print("\nExperiment 3: Gradient Boosting Regressor")
+model_gbr = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, random_state=42)
+model_gbr.fit(X_train, y_train)
+
+y_train_pred_gbr = model_gbr.predict(X_train)
+y_test_pred_gbr = model_gbr.predict(X_test)
+
+train_mse_gbr = mean_squared_error(y_train, y_train_pred_gbr)
+test_mse_gbr = mean_squared_error(y_test, y_test_pred_gbr)
+train_r2_gbr = r2_score(y_train, y_train_pred_gbr)
+test_r2_gbr = r2_score(y_test, y_test_pred_gbr)
+
+print(f"Train MSE: {train_mse_gbr}, Test MSE: {test_mse_gbr}")
+print(f"Train R2: {train_r2_gbr}, Test R2: {test_r2_gbr}")
+
+if test_r2_gbr < 0.5:
+    print("The Gradient Boosting model is underperforming, additional tuning or features may be needed.")
+else:
+    print("Gradient Boosting model performs well with no major signs of overfitting.")
