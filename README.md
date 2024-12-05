@@ -1,4 +1,4 @@
-# CryptoDataAnalysis
+# COVID-19 INFO
 
 Here's a modified version of your README that now discusses COVID-19, maintaining the structure from your previous Bitcoin project:
 
