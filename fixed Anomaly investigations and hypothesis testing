@@ -1,0 +1,32 @@
+#Anomaly investigations and hypothesis testing fixxed from feedback 
+
+Observation 1:
+"What specific factors caused the anomalous spike in new COVID-19 cases on [specific date or date range] in [specific county], when surrounding counties showed no similar pattern?"
+
+Hypothesis 1: A data reporting backlog caused cases from multiple days to be recorded on the same day in this county.
+Hypothesis 2: A super-spreader event, such as a large gathering or public event, caused the sudden increase in cases.
+Hypothesis 3: Testing capacity was significantly expanded in the county during this period, leading to higher detection rates.
+Observation 2:
+"What explains the consistently low vaccination rates in counties like [specific county] compared to neighboring counties with similar demographics?"
+
+Hypothesis 1: Access to vaccines was limited in these counties due to supply chain disruptions.
+Hypothesis 2: Cultural factors or vaccine hesitancy reduced vaccination uptake.
+Hypothesis 3: These counties have smaller populations, leading to lower absolute vaccination numbers being misinterpreted as lower uptake.
+Observation 3:
+"Why do states such as [specific state] exhibit significantly higher death-to-case ratios compared to others with similar case counts?"
+
+Hypothesis 1: These states experienced limited healthcare capacity or resources, leading to higher mortality rates.
+Hypothesis 2: Variants with higher mortality rates were more prevalent in these states.
+Hypothesis 3: Reporting discrepancies (e.g., overestimation of deaths or underreporting of cases) affected the ratios.
+Observation 4:
+"What caused a steady decrease in confirmed cases over time in counties like [specific county], while nearby counties remained steady or increased?"
+
+Hypothesis 1: Stronger public health measures (e.g., mask mandates, lockdowns) were more effective in reducing case counts in this county.
+Hypothesis 2: Underreporting or data quality issues led to an artificial decline in reported cases.
+Hypothesis 3: Seasonal effects influenced transmission rates differently in this county due to local climate or population behavior.
+Observation 5:
+"Why do some counties with low population density, such as [specific county], report unusually high case numbers relative to their population size?"
+
+Hypothesis 1: A single outbreak in a communal setting (e.g., a nursing home or prison) caused the surge in cases.
+Hypothesis 2: Data entry errors attributed cases from nearby high-density areas to these counties.
+Hypothesis 3: These counties serve as travel hubs or have industries (e.g., meatpacking plants) that increase exposure risk despite low population density.
